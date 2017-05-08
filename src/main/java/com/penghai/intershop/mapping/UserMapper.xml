@@ -14,49 +14,20 @@
   </sql>
   
   <!-- 查询数据库是否有相同的用户名 -->
-  <select id="findByUsername" parameterType="String"  resultMap="BaseResultMap">  
-        select username  from t_user where username=#{username}
+  <select id="findByUsername" parameterType="string"  resultType="java.lang.Integer">  
+        select count(*)  from t_user where username=#{username}
   </select> 
   
+    <!-- 查询数据库邮箱是否被使用 -->
+  <select id="findByEmail" parameterType="string"  resultType="java.lang.Integer">  
+        select count(*)  from t_user where email=#{email}
+  </select> 
+  
+  
   <!-- 添加一条用户信息记录 -->  
-    <insert id="insert" parameterType="com.penghai.intershop.bo.User" >
-    insert into t_user (id,username,pwd,email,phone) values(#{id,jdbcType=INTEGER},#{username,jdbcType=VARCHAR},#{pwd,jdbcType=VARCHAR},
+    <insert id="insert" parameterType="com.penghai.intershop.bo.User" useGeneratedKeys="true" keyProperty="id">
+    insert into t_user (username,pwd,email,phone) values(#{username,jdbcType=VARCHAR},#{pwd,jdbcType=VARCHAR},
         #{email,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR}) 
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="username != null" >
-        username,
-      </if>
-      <if test="pwd!= null" >
-        pwd,
-      </if>
-      <if test="email != null" >
-        email,
-      </if>
-      <if test="phone != null" >
-        phone,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="pwd!= null" >
-        #{pwd,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
-      </if>
-
-    </trim>
   </insert>
   
 </mapper>  

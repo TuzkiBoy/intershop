@@ -32,9 +32,14 @@ public class UserController extends BaseController{
 		 String pwd = user.getPwd();
 		 user.setUsername(username);
 		 user.setPwd(pwd);
-		 return Response.status(200).entity(user).build();
-		 
-		 
-
+		 return Response.status(200).entity(user).build(); //∑µªÿjson÷µ
+	}
+	
+	@POST
+	@Path(value="/register")
+	@Consumes("application/json") 
+	@Produces(MediaType.APPLICATION_JSON)
+	public String register(User user){
+		
 	}
 }
