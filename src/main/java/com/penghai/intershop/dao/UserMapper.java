@@ -13,4 +13,7 @@ public interface UserMapper {
 	//注册用户信息
 	public int insert(User user);
 	
+	//登录验证
+	public int login(String username,String pwd);
+	
 }

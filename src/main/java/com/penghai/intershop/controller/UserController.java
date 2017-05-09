@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.penghai.intershop.bo.User;
 import com.penghai.intershop.service.UserService;
 
@@ -23,23 +24,30 @@ public class UserController extends BaseController{
 	private UserService userService;
 	
 	@POST
-	@Path(value="/login")
-	@Consumes("application/json") 
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getSameUsername(User user){
-		 
-		 String username = user.getUsername();
-		 String pwd = user.getPwd();
-		 user.setUsername(username);
-		 user.setPwd(pwd);
-		 return Response.status(200).entity(user).build(); //返回json值
-	}
-	
-	@POST
 	@Path(value="/register")
 	@Consumes("application/json") 
 	@Produces(MediaType.APPLICATION_JSON)
-	public String register(User user){
+	//User user是前端传入的user实体
+	public JSONObject userRegister(User user){
+		String username = user.getUsername();
+		String pwd = user.getPwd();
+		String email = user.getEmail();
+		String phone = user.getPhone();
+		user.setUsername(username);
+		user.setPwd(pwd);
+		user.setEmail(email);
+		user.setPhone(phone);
+		JSONObject result= userService.checkRegister(user);
 		
+		return result; 
 	}
+	
+	/*@POST
+	@Path(value="/login")
+	@Consumes("application/json") 
+	@Produces(MediaType.APPLICATION_JSON)
+	public String login(String username,String pwd){
+		userService.checkLogin(username, pwd);
+	}
+*/
 }
