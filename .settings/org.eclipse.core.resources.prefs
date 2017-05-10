@@ -1,3 +1,9 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/penghai/intershop/bo/User.java=UTF-8
+encoding//src/main/java/com/penghai/intershop/controller/BaseController.java=UTF-8
+encoding//src/main/java/com/penghai/intershop/controller/UserController.java=UTF-8
+encoding//src/main/java/com/penghai/intershop/impl/UserServiceImpl.java=UTF-8
+encoding//src/main/java/com/penghai/intershop/mapping/UserMapper.xml=UTF-8
 encoding//src/main/resources/configs/jdbc.properties=UTF-8
 encoding//src/main/resources/configs/log4j.properties=UTF-8
+encoding/<project>=UTF-8

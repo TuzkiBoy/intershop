@@ -5,9 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.penghai.intershop.bo.User;
 
 public interface UserService {
-	//²éÑ¯ÓÃ»§×¢²áÓÃ»§ÃûÓÊÏäÊÇ·ñ´æÔÚ
+	//æŸ¥è¯¢ç”¨æˆ·æ³¨å†Œç”¨æˆ·åé‚®ç®±æ˜¯å¦å­˜åœ¨
 	public JSONObject checkRegister(User user);
 	
-	//ÓÃ»§µÇÂ¼ÑéÖ¤
-	public boolean checkLogin(String username,String pwd);
+	//ç”¨æˆ·ç™»å½•éªŒè¯Ö¤
+	public JSONObject checkLogin(User user);
 }

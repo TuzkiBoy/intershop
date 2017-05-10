@@ -1,19 +1,18 @@
 package com.penghai.intershop.dao;
 
-
 import com.penghai.intershop.bo.User;
 
 public interface UserMapper {
-	//²éÕÒÊÇ·ñ´æÔÚÏàÍ¬ÓÃ»§Ãû
+	//æŸ¥æ‰¾æ˜¯å¦å­˜åœ¨ç›¸åŒç”¨æˆ·å
 	public int findByUsername(String username);
 	
-	//ÑéÖ¤ÓÊÏäÊÇ·ñ±»Ê¹ÓÃ
+	//éªŒè¯é‚®ç®±æ˜¯å¦è¢«ä½¿ç”¨
 	public int findByEmail(String email);
 	
-	//×¢²áÓÃ»§ĞÅÏ¢
+	//æ³¨å†Œç”¨æˆ·ä¿¡æ¯
 	public int insert(User user);
 	
-	//µÇÂ¼ÑéÖ¤
-	public int login(String username,String pwd);
+	//ç™»å½•éªŒè¯Ö¤
+	public User login(String username,String pwd);
 	
 }

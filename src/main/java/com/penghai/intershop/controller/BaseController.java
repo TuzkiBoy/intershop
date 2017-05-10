@@ -10,17 +10,18 @@ import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 /*
- * Controller基类
+ * Controller鍩虹被
  * @author tuzki
  */
 public class BaseController {
 	public HttpServletRequest request;
 	public HttpServletResponse response;
-	// 启用日志
+	
+	// 鍚敤鏃ュ織志
 	Logger log = Logger.getLogger(BaseController.class);
-	public SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式--年月日时分秒
-	public SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH");// 设置日期格式--年月日时
-	public SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");// 设置日期格式--年月日
+	public SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 锟斤拷锟斤拷锟斤拷锟节革拷式--锟斤拷锟斤拷锟斤拷时锟斤拷锟斤拷
+	public SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH");// 锟斤拷锟斤拷锟斤拷锟节革拷式--锟斤拷锟斤拷锟斤拷时
+	public SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");// 锟斤拷锟斤拷锟斤拷锟节革拷式--锟斤拷锟斤拷锟斤拷
 
 	@ModelAttribute
 	public void initial(HttpServletRequest request, HttpServletResponse response) throws ServletException {

@@ -14,64 +14,66 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserMapper userMapper;
 	
-	//Í¨¹ıÓÃ»§Ãû²éÑ¯ÓÃ»§
+	//é€šè¿‡ç”¨æˆ·åæŸ¥è¯¢ç”¨æˆ·
 	public JSONObject checkRegister(User user) {
  		
- 		//1£¬ÅĞ¶ÏÓÃ»§ÃûÊÇ·ñ´æÔÚ Èô´æÔÚ¾ÍÌáÊ¾ÓÃ»§´æÔÚ²¢·µ»Ø£¬²»´æÔÚ£¬¾ÍÖ´ĞĞ2
+		//1ï¼Œåˆ¤æ–­ç”¨æˆ·åæ˜¯å¦å­˜åœ¨ è‹¥å­˜åœ¨å°±æç¤ºç”¨æˆ·å­˜åœ¨å¹¶è¿”å›ï¼Œä¸å­˜åœ¨ï¼Œå°±æ‰§è¡Œ2
 		int isAUser = userMapper.findByUsername(user.getUsername());
-		// ·µ»ØµÄ½á¹¹
+		// è¿”å›çš„ç»“æ„
 		JSONObject jsonObject = new JSONObject();
 		if(isAUser==0){
-			//2£¬¼ì²éÓÊÏäÊÇ·ñ´æÔÚ£¬´æÔÚ¾ÍÌáÊ¾ÓÊÏäÖØ¸´£¬·ñÔò½øĞĞ3
+			//2ï¼Œæ£€æŸ¥é‚®ç®±æ˜¯å¦å­˜åœ¨ï¼Œå­˜åœ¨å°±æç¤ºé‚®ç®±é‡å¤ï¼Œå¦åˆ™è¿›è¡Œ3
 			int isAEmail = userMapper.findByEmail(user.getEmail());
-			//3£¬¾ù·ûºÏÒªÇó¾ÍÔö¼Ó¼ÇÂ¼£¬µÃµ½·µ»ØµÄIDÖµ£¬
+			//3ï¼Œå‡ç¬¦åˆè¦æ±‚å°±å¢åŠ è®°å½•ï¼Œå¾—åˆ°è¿”å›çš„IDå€¼ï¼Œ
 	 		if(isAEmail==0){
 	 			int result = userMapper.insert(user);
-	 			//4£¬ÈôIDÖµ´óÓÚ0£¬ÄÇÃ´·µ»Ø³É¹¦ £¬·ñÔò·µ»ØÊ§°Ü
+	 			//4ï¼Œè‹¥IDå€¼å¤§äº0ï¼Œé‚£ä¹ˆè¿”å›æˆåŠŸ ï¼Œå¦åˆ™è¿”å›å¤±è´¥
 	 			if (result>0){
 	 				jsonObject.put("success", "0");
-	 				jsonObject.put("message", "×¢²á³É¹¦");
+	 				jsonObject.put("message", "æ³¨å†ŒæˆåŠŸ");
 	 				return jsonObject;
 	 			}else{
 	 				jsonObject.put("success", "1");
-	 				jsonObject.put("message", "ºóÌ¨´íÎó");
+	 				jsonObject.put("message", "åå°é”™è¯¯");
 	 				return jsonObject;
 	 			}
 	 			
 	 		}else{
 	 			jsonObject.put("success", "2");
- 				jsonObject.put("message","ÓÊÏäÖØ¸´");
+ 				jsonObject.put("message","é‚®ç®±é‡å¤");
  				return jsonObject;
 	 		}
 		}else{
 				jsonObject.put("success", "3");
-				jsonObject.put("message", "ÓÃ»§ÃûÒÑ´æÔÚ");
+				jsonObject.put("message", "ç”¨æˆ·åå·²å­˜åœ¨");
 				return jsonObject;
 		}
 	
  		
 	}
 	
-	//ÓÃ»§µÇÂ¼ÑéÖ¤
-	public boolean checkLogin(String username,String pwd){
-		//ÅĞ¶ÏÓÃ»§ÃûºÍÃÜÂëÊÇ·ñÆ¥Åä£¬Èç¹ûÓÃ»§Ãû´æÔÚ²¢ÇÒÃÜÂëÏàÆ¥Åä£¬Ôò³É¹¦µÇÂ¼
-		//1.ÓÃ»§Ãû²»Îª¿Õ£¬ÑéÖ¤ÓÃ»§ÃûÓëÊı¾İ¿âÓÃ»§ÃûÊÇ·ñÏàµÈ
-		//2.ÓÃ»§ÃûÏàµÈ£¬ÑéÖ¤ÃÜÂëºÍÊı¾İ¿âÖĞÃÜÂëÊÇ·ñÏàµÈ
-		//3.ÓÃ»§ÃûºÍÃÜÂëÏàµÈÔò³É¹¦µÇÂ¼
+	//ç”¨æˆ·ç™»å½•éªŒè¯
+	
+	public JSONObject checkLogin(User user){
+		//åˆ¤æ–­ç”¨æˆ·åå’Œå¯†ç æ˜¯å¦åŒ¹é…ï¼Œå¦‚æœç”¨æˆ·åå­˜åœ¨å¹¶ä¸”å¯†ç ç›¸åŒ¹é…ï¼Œåˆ™æˆåŠŸç™»å½•
 		
-        if (username!= null) {
-        	if(username.equals(username)){
-        		if(pwd.equals(pwd)){
-        			return true;
-        		}else{
-        			return false;
-        		}
-        	}else{
-        		return true;
-        	}
-        }else{
-        	return false;
-        }
+		User users = userMapper.login(user.getUsername(), user.getPwd());
+		JSONObject jsonObject = new JSONObject();
+		
+		
+		
+			if(users!=null && user.getUsername().equals(users.getUsername()) && user.getPwd().equals(users.getPwd())){
+				jsonObject.put("success", "4");
+				jsonObject.put("message", "ç™»å½•æˆåŠŸ");
+				return jsonObject;
+			} else {
+				jsonObject.put("success", "5");
+				jsonObject.put("message", "ç™»å½•å¤±è´¥");
+				return jsonObject;
+			}
+			
+	
 	}
-}
+}	
+
 

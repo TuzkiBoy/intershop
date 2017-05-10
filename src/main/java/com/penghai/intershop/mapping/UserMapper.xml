@@ -31,7 +31,8 @@
   </insert>
   
   <!-- 用户登录检查用户名和密码 -->
-    <select id="login" parameterType="string"  resultType="java.lang.Integer">  
-        select username,pwd from t_user where username=#{username} andpwd=#{pwd};
+    <select id="login" parameterType="string"  resultType="com.penghai.intershop.bo.User">  
+        select username,pwd from t_user where username=#{0} and pwd=#{1}
   </select> 
+  
 </mapper>  
