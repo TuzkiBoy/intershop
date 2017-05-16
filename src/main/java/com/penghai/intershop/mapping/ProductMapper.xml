@@ -15,12 +15,21 @@
     id,category,productname,price,shop,evaluate,picture
   </sql>
   
+  <!-- 查询商品数据个数 -->
+   <select id="selectDataNum" resultType="java.lang.Integer" parameterType="com.penghai.intershop.bo.Select">  
+        select count(*) from products 
+        <if test = "_parameter!=null and _parameter!=''" >
+         where productname like CONCAT('%', #{productname}, '%')  
+        </if>
+   </select> 
+   
+  
    <!-- 模糊查询 -->
    <select id="selectByFuzzyAndPage" resultMap="BaseResultMap" parameterType="com.penghai.intershop.bo.Select">  
         select 
         <include refid="Products_List"/>
          from products 
-        <if test = "_parameter!=null">
+        <if test = "_parameter!=null and _parameter!=''" >
          where productname like CONCAT('%', #{productname}, '%')  
          order by id
          limit #{page},20
