@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.penghai.intershop.bo.Select;
 import com.penghai.intershop.service.ProductService;
 
@@ -27,14 +27,14 @@ public class ProductController extends BaseController{
 	
 	//传入参数为Product product
 	
-	public JSONArray getAllData(Select select){
+	public JSONObject getAllData(Select select){
 		//通过模糊查询获得所有此商品的信息 
 		String productname = select.getProductname();
 		select.setProductname(productname);
 		Integer page = select.getPage();
 		Integer start = (page - 1) * 20;
 		select.setPage(start);
-		JSONArray result = productService.getAllProductData(select);
+		JSONObject result = productService.getAllProductData(select);
 		return result;
 	}
 	

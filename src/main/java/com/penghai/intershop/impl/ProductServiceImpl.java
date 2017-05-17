@@ -19,18 +19,16 @@ public class ProductServiceImpl implements ProductService{
 	private ProductMapper productMapper;
 
 	//模糊分页查询
-	public JSONArray getAllProductData(Select select) {
+	public JSONObject getAllProductData(Select select) {
 		
 		//1.通过输入的关键字进行模糊查询并同时获取到数据长度
 		List<Product> productData = productMapper.selectByFuzzyAndPage(select);
 		int productDataNum = productMapper.selectDataNum(select);
 		JSONArray jsonArray = new JSONArray();
-		JSONArray jsonARRAY = new JSONArray();
-		JSONObject jsonObject = new JSONObject();
 		JSONObject jsonObj = new JSONObject();
 			for (int i = 0; i < productData.size(); i++) {
 				Product p = productData.get(i);
-
+				JSONObject jsonObject = new JSONObject();
 				jsonObject.put("id", p.getId());
 				jsonObject.put("productname", p.getProductname());
 				jsonObject.put("price", p.getPrice());
@@ -40,9 +38,10 @@ public class ProductServiceImpl implements ProductService{
 			}
 			jsonObj.put("dataNum", productDataNum);
 			jsonObj.put("data", jsonArray);
-			jsonARRAY.add(jsonObj);
+			
+			
 			//返回数据长度
-			return jsonARRAY;
+			return jsonObj;
 		
 		} 
 
